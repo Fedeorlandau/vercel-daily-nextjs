@@ -1,5 +1,4 @@
 export function Footer() {
-  const year = new Date().getFullYear()
   return (
     <footer className="border-t-4 border-foreground bg-foreground text-primary-foreground">
       <div className="h-1 bg-accent" />
@@ -12,7 +11,7 @@ export function Footer() {
         </div>
 
         <p className="label-mono text-xs text-primary-foreground/50">
-          © {year} The Daily Dispatch. All rights reserved.
+          © 2026 The Daily Dispatch. All rights reserved.
         </p>
 
         <nav className="flex items-center gap-4">
