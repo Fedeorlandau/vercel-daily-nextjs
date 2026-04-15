@@ -18,8 +18,8 @@ This is my Nextjs Foundations repo: [https://github.com/Fedeorlandau/nextjs-foun
 
 ## Plan
 
-- [] Create the respective app router scaffolding for the requirements.
-- [] Add not found fallbacks depending on the page
+- [x] Create the respective app router scaffolding for the requirements.
+- [x] Add not found fallbacks depending on the page
 - [] Layout for articles, suspense for trending articles
 - [] API Key configured for access to resources
 - [] API Services with server-only
