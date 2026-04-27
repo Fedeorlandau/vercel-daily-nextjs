@@ -1,5 +1,11 @@
 import { ArticleDetail } from "@/components/article-detail";
-import { getArticle, getArticlesList, getSiteConfig } from "@/lib/services";
+import { getSubscriptionStatus } from "@/lib/auth";
+import {
+  getArticle,
+  getArticlesList,
+  getSiteConfig,
+  getSubscription,
+} from "@/lib/services";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
@@ -39,5 +45,5 @@ export default async function ArticlesPage(
   const { slug } = await props.params;
   const article = await getArticle(slug);
 
-  return <ArticleDetail article={article} subscribed={true} />;
+  return <ArticleDetail article={article} />;
 }

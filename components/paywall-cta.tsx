@@ -1,12 +1,7 @@
-"use client"
+import { createSubscriptionAction } from "@/app/actions";
+import { Lock } from "lucide-react";
 
-import { Lock } from "lucide-react"
-
-interface PaywallCTAProps {
-  onSubscribe?: () => void
-}
-
-export function PaywallCTA({ onSubscribe }: PaywallCTAProps) {
+export function PaywallCTA() {
   return (
     <div className="border-4 border-foreground bg-card relative overflow-hidden">
       {/* Decorative diagonal stripes top */}
@@ -25,24 +20,26 @@ export function PaywallCTA({ onSubscribe }: PaywallCTAProps) {
           </div>
         </div>
 
-        <p className="label-mono text-accent text-xs mb-2">SUBSCRIBER CONTENT</p>
+        <p className="label-mono text-accent text-xs mb-2">
+          SUBSCRIBER CONTENT
+        </p>
         <h3 className="font-serif font-bold text-2xl text-foreground mb-3 text-balance">
           This story is behind the paywall.
         </h3>
         <p className="font-sans text-sm text-muted-foreground mb-6 max-w-sm mx-auto leading-relaxed">
-          Subscribe to The Daily Dispatch to unlock unlimited access to all engineering deep dives, changelogs, and community stories.
+          Subscribe to The Daily Dispatch to unlock unlimited access to all
+          engineering deep dives, changelogs, and community stories.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <button
-            onClick={onSubscribe}
-            className="bg-foreground text-primary-foreground label-mono text-xs px-8 py-3 hover:bg-accent hover:text-accent-foreground transition-colors"
-          >
-            Subscribe — It&apos;s Free →
-          </button>
-          <button className="border-2 border-foreground text-foreground label-mono text-xs px-8 py-3 hover:bg-foreground hover:text-primary-foreground transition-colors">
-            Learn More
-          </button>
+          <form action={createSubscriptionAction}>
+            <button
+              type="submit"
+              className="bg-foreground text-primary-foreground label-mono text-xs px-8 py-3 hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              Subscribe — It&apos;s Free →
+            </button>
+          </form>
         </div>
 
         <p className="font-sans text-xs text-muted-foreground mt-4">
@@ -59,5 +56,5 @@ export function PaywallCTA({ onSubscribe }: PaywallCTAProps) {
         }}
       />
     </div>
-  )
+  );
 }

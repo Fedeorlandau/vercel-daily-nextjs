@@ -1,17 +1,14 @@
 import { Article } from "@/lib/types";
-import { PaywallCTA } from "./paywall-cta";
 import { TrendingArticles } from "./trending-articles";
 import { Suspense } from "react";
+import ArticleContent from "./article-content";
 
 interface ArticleDetailProps {
   article: Article;
   subscribed?: boolean;
 }
 
-export function ArticleDetail({
-  article,
-  subscribed = false,
-}: ArticleDetailProps) {
+export function ArticleDetail({ article, subscribed }: ArticleDetailProps) {
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
       <div className="grid lg:grid-cols-3 gap-10">
@@ -53,21 +50,9 @@ export function ArticleDetail({
             />
           </div>
 
-          {/* Article content / paywall */}
-          {subscribed ? (
-            <div className="font-sans text-base text-foreground leading-relaxed space-y-4">
-              {article.content.map((block) => {
-                return <div>{block.type}</div>;
-              })}
-            </div>
-          ) : (
-            <>
-              <p className="font-sans text-base text-foreground leading-relaxed mb-6">
-                {article.excerpt}
-              </p>
-              <PaywallCTA onSubscribe={() => {}} />
-            </>
-          )}
+          <Suspense>
+            <ArticleContent article={article} />
+          </Suspense>
         </article>
 
         {/* Sidebar */}
@@ -75,26 +60,6 @@ export function ArticleDetail({
           <Suspense>
             <TrendingArticles />
           </Suspense>
-          {!subscribed && (
-            <div className="border-4 border-foreground p-5 bg-card">
-              <p className="label-mono text-accent text-xs mb-2">
-                DAILY DISPATCH
-              </p>
-              <p className="font-serif font-bold text-lg text-foreground mb-3">
-                Never miss a story.
-              </p>
-              <p className="font-sans text-sm text-muted-foreground mb-4 leading-relaxed">
-                Subscribe to receive the latest engineering updates, changelogs,
-                and deep dives.
-              </p>
-              <button
-                onClick={() => {}}
-                className="w-full bg-foreground text-primary-foreground label-mono text-xs py-2.5 hover:bg-accent hover:text-accent-foreground transition-colors"
-              >
-                Subscribe Now
-              </button>
-            </div>
-          )}
         </aside>
       </div>
     </div>

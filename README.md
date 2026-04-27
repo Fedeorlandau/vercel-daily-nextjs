@@ -18,7 +18,7 @@ This is my Nextjs Foundations repo: [https://github.com/Fedeorlandau/nextjs-foun
 
 ## Timeline
 
-- Requested v0 for design with 0 business logic
+- **AI Usage: **Requested v0 for design with 0 business logic. https://v0.app/chat/ui-component-design-hnW8YBaHnda?ref=USSWZW
 - Started decompsing the v0 single page into components
 - Created a [slug] in articles route to start building the single article page
 - **Decision**: Im going to generate at build time just the first 20 articles from the api response. (The api supports pagination)
@@ -38,6 +38,21 @@ This is my Nextjs Foundations repo: [https://github.com/Fedeorlandau/nextjs-foun
 - I will just use composition pattern and implement server actions for dealing with cookies
 - **Vercel:** The subscription status endpoint should return an expiry date so we can have maxAge on cookie
 - What if I wrap the session in a cache tag and revalidate it?
+- Security aspect: If I get the full article on the [slug]/page.tsx and I pass it down to the Article component, does it get leaked any time in the stream?
+- Also, this is where the RSC implementation by Next gets really frustrating:
+
+```
+  const { slug } = await props.params;
+  const article = await getArticle(slug);
+  const subscribed = await getSubscription();
+```
+
+My getArticle function is **cached** but the **subscribed** one reads from cookies. So is the benefit just caching the articles fetch? Then the page will load dynamically anyways. To my point: then what is the point of the "use cache" boilerplate if the entire page becomes dynamic by the use of cookies (which is the 99.999% of the websites)
+
+- Back to it, I know I get it, I need to move things down the chain, wrap things in Suspense and I should be fine. getSubscription will live down the tree. It makes sense. Skill issue?
+- It's starting to look ok now but I dont really like how next is forcing me to structure my components.
+- ** AI Usage**: to format the content response for the articles. https://v0.app/chat/pJU5AuA6Ovb?ref=USSWZW
+- I know I should be adding a markdown render but I prefer focusing on search now
 
 ## General Site Requirements
 
