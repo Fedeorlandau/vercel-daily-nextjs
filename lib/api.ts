@@ -4,6 +4,7 @@ import {
   ArticleResponse,
   PublicationConfig,
   PublicationConfigResponse,
+  TrendingArticlesResponse,
 } from "./types";
 
 export async function getArticles() {
@@ -50,6 +51,22 @@ export async function getPublicationConfig() {
   });
 
   const response = (await apiCall.json()) as PublicationConfigResponse;
+
+  return response.data;
+}
+
+export async function getTrendingArticles() {
+  const baseUrl = process.env.API_BASE_URL;
+  const apiKey = process.env.API_KEY as string;
+
+  const reqHeaders = new Headers();
+  reqHeaders.set("x-vercel-protection-bypass", apiKey);
+
+  const apiCall = await fetch(`${baseUrl}/articles/trending`, {
+    headers: reqHeaders,
+  });
+
+  const response = (await apiCall.json()) as TrendingArticlesResponse;
 
   return response.data;
 }

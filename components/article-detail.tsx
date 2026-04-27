@@ -1,31 +1,17 @@
-"use client";
-
 import { Article } from "@/lib/types";
-import { MOCK_ARTICLES } from "./featured-articles";
 import { PaywallCTA } from "./paywall-cta";
 import { TrendingArticles } from "./trending-articles";
+import { Suspense } from "react";
 
 interface ArticleDetailProps {
   article: Article;
   subscribed?: boolean;
 }
 
-const FULL_BODY = `The internet is no longer a collection of static documents — it is a living, breathing infrastructure serving billions of real-time requests. Our CDN has grown from handling thousands of requests per hour to over three million per day, and that growth has forced us to rethink assumptions baked into the original architecture.
-
-The most significant change in this release is request collapsing. When a cache entry expires and dozens of simultaneous requests arrive for the same resource, only one request is forwarded to the origin. The rest are held in a queue and served from the freshly-populated cache entry the moment it returns. This dramatically reduces the so-called "thundering herd" problem at the origin.
-
-Implementing this correctly required a distributed locking mechanism that operates in microseconds across our globally distributed PoPs. We evaluated several approaches — optimistic concurrency via compare-and-swap, consensus-based locks using a Raft-adjacent protocol, and finally settled on a token-bucket queue with a sidecar process managing expiry. The result is p99 latency under 12 ms at the edge even during cache stampedes.
-
-The second major change is smarter TTL revalidation. Previously, stale-while-revalidate would re-fetch regardless of how stale the content was. Now, we factor in the origin's historical response latency and adaptively delay background revalidation to smooth traffic spikes.
-
-Both features are now generally available for all plans.`;
-
 export function ArticleDetail({
   article,
   subscribed = false,
 }: ArticleDetailProps) {
-  const trending = MOCK_ARTICLES.filter((a) => a.id !== article.id).slice(0, 3);
-
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
       <div className="grid lg:grid-cols-3 gap-10">
@@ -70,11 +56,9 @@ export function ArticleDetail({
           {/* Article content / paywall */}
           {subscribed ? (
             <div className="font-sans text-base text-foreground leading-relaxed space-y-4">
-              {FULL_BODY.trim()
-                .split("\n\n")
-                .map((para, i) => (
-                  <p key={i}>{para}</p>
-                ))}
+              {article.content.map((block) => {
+                return <div>{block.type}</div>;
+              })}
             </div>
           ) : (
             <>
@@ -88,7 +72,9 @@ export function ArticleDetail({
 
         {/* Sidebar */}
         <aside className="space-y-8">
-          <TrendingArticles articles={trending} />
+          <Suspense>
+            <TrendingArticles />
+          </Suspense>
           {!subscribed && (
             <div className="border-4 border-foreground p-5 bg-card">
               <p className="label-mono text-accent text-xs mb-2">

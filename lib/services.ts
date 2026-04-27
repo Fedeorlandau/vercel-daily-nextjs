@@ -1,4 +1,9 @@
-import { getArticleBySlug, getArticles, getPublicationConfig } from "./api";
+import {
+  getArticleBySlug,
+  getArticles,
+  getPublicationConfig,
+  getTrendingArticles,
+} from "./api";
 
 export async function getSiteConfig() {
   "use cache";
@@ -18,6 +23,13 @@ export async function getArticlesList() {
   "use cache";
 
   const articles = await getArticles();
+
+  return articles;
+}
+
+export async function getFeaturedArticles() {
+  "use cache";
+  const articles = await getTrendingArticles();
 
   return articles;
 }

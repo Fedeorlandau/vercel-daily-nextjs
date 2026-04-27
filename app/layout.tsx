@@ -34,6 +34,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 export async function generateMetadata(): Promise<Metadata> {
   const config = await getSiteConfig();
 
+  // TODO: There are more props in siteConfig
   return {
     title: config.seo.defaultTitle,
     description: config.seo.defaultDescription,

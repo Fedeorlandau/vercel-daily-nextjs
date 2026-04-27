@@ -1,6 +1,6 @@
 import { ArticleDetail } from "@/components/article-detail";
 import { getArticle, getArticlesList, getSiteConfig } from "@/lib/services";
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 
 export async function generateMetadata({
   params,

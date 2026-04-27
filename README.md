@@ -4,7 +4,7 @@ This repository is the solution for the Vercel Daily Challenge.
 
 ## AI Usage
 
-This solution is been built on Visual Studio Code with the Copilot extension DISABLED. Autocompletes are also disabled. The AGENTS.md and CLAUDE.md files were removed. The Design has been developed with v0 https://v0.app/chat/ui-component-design-hnW8YBaHnda?ref=USSWZW You can see the chat history where I only got UI components with explicit no Nextjs or business logic in the generation.
+This solution is been built on Visual Studio Code with the Copilot extension **DISABLED**. Autocompletes are also disabled. The AGENTS.md and CLAUDE.md files were removed. The Design has been developed with v0 https://v0.app/chat/ui-component-design-hnW8YBaHnda?ref=USSWZW You can see the chat history where I only got UI components with explicit no Nextjs or business logic in the generation.
 
 Actions taken after copy/paste components
 
@@ -20,11 +20,25 @@ This is my Nextjs Foundations repo: [https://github.com/Fedeorlandau/nextjs-foun
 
 - [x] Create the respective app router scaffolding for the requirements.
 - [x] Add not found fallbacks depending on the page
-- [] Layout for articles, suspense for trending articles
-- [] API Key configured for access to resources
-- [] API Services with server-only
+- [x] API Key configured for access to resources
+- [x] API Services with server-only
 - [] Proxy at some point for subscribers access?
 - [] Make header subscriber status non blocking
+
+## Timeline
+
+- Requested v0 for design with 0 business logic
+- Started decompsing the v0 single page into components
+- Created a [slug] in articles route to start building the single article page
+- **Decision**: Im going to generate at build time just the first 20 articles from the api response. (The api supports pagination)
+- **AI Usage: **the models in the documentation schema to typescript types for better coding since I dont have Copilot at all. https://v0.app/chat/yaml-to-typescript-qhgnnYiEv7z?ref=USSWZW
+- **Decision**: I've first had functions for data access with 'use cache' directly on the page but since I need to reuse them I moved them to services.
+- The main layout loads the default SEO and I do some replaces in the article page with generateMetadata
+- Working on featured articles, this was a client component but Im moving it to server component with cached api call and wrap into suspense.
+- Replaced regular img for next/image. I had to whitelist domain in next config.
+- **AI Usage**: to generate the skeleton of the featured hero article https://v0.app/chat/loading-state-component-hFABUhPj2Cg?ref=USSWZW
+- Use suspense and the skeleton above to not block the UI render for featured posts in homepage.
+-
 
 ## General Site Requirements
 
