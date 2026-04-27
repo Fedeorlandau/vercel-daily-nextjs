@@ -1,4 +1,4 @@
-import { createSubscriptionAction } from "@/app/actions";
+import { createSubscriptionAction, unsubscribeAction } from "@/app/actions";
 import { getSubscription } from "@/lib/services";
 
 async function NavbarActions() {
@@ -9,9 +9,14 @@ async function NavbarActions() {
       <span className="label-mono bg-accent text-accent-foreground px-3 py-1.5 text-xs">
         ✓ SUBSCRIBED
       </span>
-      <button className="label-mono text-xs border border-foreground px-3 py-1.5 hover:bg-foreground hover:text-primary-foreground transition-colors">
-        Unsubscribe
-      </button>
+      <form action={unsubscribeAction}>
+        <button
+          type="submit"
+          className="label-mono text-xs border border-foreground px-3 py-1.5 hover:bg-foreground hover:text-primary-foreground transition-colors"
+        >
+          Unsubscribe
+        </button>
+      </form>
     </div>
   ) : (
     <form action={createSubscriptionAction}>

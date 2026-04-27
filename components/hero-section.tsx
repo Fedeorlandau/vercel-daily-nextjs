@@ -1,6 +1,8 @@
 import { Suspense } from "react";
 import FeaturedArticleHero from "./featured-article-hero";
 import { FeaturedArticleHeroSkeleton } from "./featured-article-hero-skeleton";
+import { createSubscriptionAction } from "@/app/actions";
+import HeroActions from "./hero-actions";
 export function HeroSection() {
   return (
     <section className="border-b-4 border-foreground bg-background">
@@ -24,9 +26,9 @@ export function HeroSection() {
               >
                 Browse articles →
               </a>
-              <button className="inline-flex items-center gap-2 border-2 border-foreground text-foreground px-6 py-3 label-mono text-xs hover:bg-foreground hover:text-primary-foreground transition-colors">
-                Subscribe
-              </button>
+              <Suspense>
+                <HeroActions />
+              </Suspense>
             </div>
           </div>
 

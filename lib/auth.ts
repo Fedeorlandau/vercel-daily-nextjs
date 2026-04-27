@@ -51,3 +51,21 @@ export async function activateSubscription(token: string) {
 
   return response.data;
 }
+
+export async function deactivateSubscription(token: string) {
+  const baseUrl = process.env.API_BASE_URL;
+  const apiKey = process.env.API_KEY as string;
+
+  const reqHeaders = new Headers();
+  reqHeaders.set("x-vercel-protection-bypass", apiKey);
+  reqHeaders.set("x-subscription-token", token);
+
+  const apiCall = await fetch(`${baseUrl}/subscription`, {
+    method: "DELETE",
+    headers: reqHeaders,
+  });
+
+  const response = (await apiCall.json()) as SubscriptionResponse;
+
+  return response.data;
+}

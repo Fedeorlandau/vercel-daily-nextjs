@@ -34,8 +34,9 @@ This is my Nextjs Foundations repo: [https://github.com/Fedeorlandau/nextjs-foun
 - The featured articles are showing just 5 because the sixth is on the hero. Thats my design decision :P
 - Started replacing anchor for nextjs link
 - Now I will work on setting cookies for the subscribed state
-- I found my first dealbreaker, i've tried to use next/headers cookies inside a RSC outside the app folder. I understand why this doesnt work but its so frustrating. I had a my navbar as a client component, wrapped a RSC in suspense but It doesnt work if i call cookies in that RSC. This is forcing me to rethink my navbar to move client behaviour as down as possible.
+- **Vercel:** I found my first dealbreaker, i've tried to use next/headers cookies inside a RSC outside the app folder. I understand why this doesnt work but its so frustrating. I had a my navbar as a client component, wrapped a RSC in suspense but It doesnt work if i call cookies in that RSC. This is forcing me to rethink my navbar to move client behaviour as down as possible.
 - I will just use composition pattern and implement server actions for dealing with cookies
+- **Vercel:** The subscription status endpoint should return an expiry date so we can have maxAge on cookie
 - What if I wrap the session in a cache tag and revalidate it?
 
 ## General Site Requirements
