@@ -16,15 +16,6 @@ Actions taken after copy/paste components
 
 This is my Nextjs Foundations repo: [https://github.com/Fedeorlandau/nextjs-foundations](https://github.com/Fedeorlandau/nextjs-foundations) where I first tested a few features that I will implement here.
 
-## Plan
-
-- [x] Create the respective app router scaffolding for the requirements.
-- [x] Add not found fallbacks depending on the page
-- [x] API Key configured for access to resources
-- [x] API Services with server-only
-- [] Proxy at some point for subscribers access?
-- [] Make header subscriber status non blocking
-
 ## Timeline
 
 - Requested v0 for design with 0 business logic
@@ -39,6 +30,8 @@ This is my Nextjs Foundations repo: [https://github.com/Fedeorlandau/nextjs-foun
 - **AI Usage**: to generate the skeleton of the featured hero article https://v0.app/chat/loading-state-component-hFABUhPj2Cg?ref=USSWZW
 - Use suspense and the skeleton above to not block the UI render for featured posts in homepage.
 - Implemented the breaking news also using suspense
+- Here I realized that the features articles should come from the list of articles and not the trending API.
+- The featured articles are showing just 5 because the sixth is on the hero. Thats my design decision :P
 
 ## General Site Requirements
 

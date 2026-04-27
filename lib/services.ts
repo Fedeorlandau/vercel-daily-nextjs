@@ -23,14 +23,24 @@ export async function getArticle(slug: string) {
 export async function getArticlesList() {
   "use cache";
 
-  const articles = await getArticles();
+  const articles = await getArticles({});
 
   return articles;
 }
 
+export async function getTrendingArticlesList() {
+  "use cache";
+
+  const trendingArticles = await getTrendingArticles();
+
+  return trendingArticles;
+}
+
 export async function getFeaturedArticles() {
   "use cache";
-  const articles = await getTrendingArticles();
+  const articles = await getArticles({
+    featured: true,
+  });
 
   return articles;
 }

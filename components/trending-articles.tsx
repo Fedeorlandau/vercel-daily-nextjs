@@ -1,7 +1,7 @@
-import { getFeaturedArticles } from "@/lib/services";
+import { getFeaturedArticles, getTrendingArticlesList } from "@/lib/services";
 
 export async function TrendingArticles() {
-  const articles = await getFeaturedArticles();
+  const articles = await getTrendingArticlesList();
   return (
     <aside>
       <div className="border-b-2 border-foreground pb-2 mb-4">

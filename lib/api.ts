@@ -3,19 +3,27 @@ import {
   ArticleListResponse,
   ArticleResponse,
   BreakingNewsResponse,
-  PublicationConfig,
   PublicationConfigResponse,
   TrendingArticlesResponse,
 } from "./types";
 
-export async function getArticles() {
+export async function getArticles({ featured }: { featured?: boolean }) {
   const baseUrl = process.env.API_BASE_URL;
   const apiKey = process.env.API_KEY as string;
 
   const reqHeaders = new Headers();
   reqHeaders.set("x-vercel-protection-bypass", apiKey);
 
-  const apiCall = await fetch(`${baseUrl}/articles?page=1&limit=20`, {
+  const params = new URLSearchParams({
+    page: "1",
+    limit: "20",
+  });
+
+  if (featured !== undefined) {
+    params.append("featured", String(featured));
+  }
+
+  const apiCall = await fetch(`${baseUrl}/articles?${params.toString()}`, {
     headers: reqHeaders,
   });
 
