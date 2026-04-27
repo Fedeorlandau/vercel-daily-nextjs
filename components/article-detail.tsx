@@ -1,6 +1,6 @@
 "use client";
 
-import type { Article } from "./article-card";
+import { Article } from "@/lib/types";
 import { MOCK_ARTICLES } from "./featured-articles";
 import { PaywallCTA } from "./paywall-cta";
 import { TrendingArticles } from "./trending-articles";
@@ -8,7 +8,6 @@ import { TrendingArticles } from "./trending-articles";
 interface ArticleDetailProps {
   article: Article;
   subscribed?: boolean;
-  onSubscribe?: () => void;
 }
 
 const FULL_BODY = `The internet is no longer a collection of static documents — it is a living, breathing infrastructure serving billions of real-time requests. Our CDN has grown from handling thousands of requests per hour to over three million per day, and that growth has forced us to rethink assumptions baked into the original architecture.
@@ -24,7 +23,6 @@ Both features are now generally available for all plans.`;
 export function ArticleDetail({
   article,
   subscribed = false,
-  onSubscribe,
 }: ArticleDetailProps) {
   const trending = MOCK_ARTICLES.filter((a) => a.id !== article.id).slice(0, 3);
 
@@ -40,7 +38,7 @@ export function ArticleDetail({
                 {article.category}
               </span>
               <span className="label-mono text-muted-foreground text-xs">
-                {article.date}
+                {article.publishedAt}
               </span>
             </div>
             <h1 className="font-serif font-bold text-3xl md:text-4xl text-foreground leading-tight text-balance mb-4">
@@ -49,15 +47,12 @@ export function ArticleDetail({
             <div className="flex items-center gap-3">
               <div className="w-7 h-7 bg-foreground border-2 border-foreground flex items-center justify-center">
                 <span className="text-primary-foreground font-mono text-xs font-bold">
-                  {article.author.charAt(0)}
+                  {article.author.name}
                 </span>
               </div>
               <div>
                 <p className="font-sans text-sm font-semibold text-foreground">
-                  By {article.author}
-                </p>
-                <p className="label-mono text-xs text-muted-foreground">
-                  Staff Writer
+                  By {article.author.name}
                 </p>
               </div>
             </div>
@@ -86,7 +81,7 @@ export function ArticleDetail({
               <p className="font-sans text-base text-foreground leading-relaxed mb-6">
                 {article.excerpt}
               </p>
-              <PaywallCTA onSubscribe={onSubscribe} />
+              <PaywallCTA onSubscribe={() => {}} />
             </>
           )}
         </article>
@@ -107,7 +102,7 @@ export function ArticleDetail({
                 and deep dives.
               </p>
               <button
-                onClick={onSubscribe}
+                onClick={() => {}}
                 className="w-full bg-foreground text-primary-foreground label-mono text-xs py-2.5 hover:bg-accent hover:text-accent-foreground transition-colors"
               >
                 Subscribe Now
