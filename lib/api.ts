@@ -1,5 +1,10 @@
 import "server-only";
-import { ArticleListResponse, ArticleResponse } from "./types";
+import {
+  ArticleListResponse,
+  ArticleResponse,
+  PublicationConfig,
+  PublicationConfigResponse,
+} from "./types";
 
 export async function getArticles() {
   const baseUrl = process.env.API_BASE_URL;
@@ -29,6 +34,22 @@ export async function getArticleBySlug(slug: string) {
   });
 
   const response = (await apiCall.json()) as ArticleResponse;
+
+  return response.data;
+}
+
+export async function getPublicationConfig() {
+  const baseUrl = process.env.API_BASE_URL;
+  const apiKey = process.env.API_KEY as string;
+
+  const reqHeaders = new Headers();
+  reqHeaders.set("x-vercel-protection-bypass", apiKey);
+
+  const apiCall = await fetch(`${baseUrl}/publication/config`, {
+    headers: reqHeaders,
+  });
+
+  const response = (await apiCall.json()) as PublicationConfigResponse;
 
   return response.data;
 }

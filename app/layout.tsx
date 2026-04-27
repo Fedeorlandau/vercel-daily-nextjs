@@ -9,6 +9,7 @@ import "./globals.css";
 import { BreakingNewsBanner } from "@/components/breaking-news-banner";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "react-day-picker";
+import { getSiteConfig } from "@/lib/services";
 
 const libreBaskerville = Libre_Baskerville({
   subsets: ["latin"],
@@ -30,21 +31,25 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "The Daily Dispatch",
-  description: "News and insights for modern web developers.",
-  generator: "v0.app",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const config = await getSiteConfig();
 
-export default function RootLayout({
+  return {
+    title: config.seo.defaultTitle,
+    description: config.seo.defaultDescription,
+  };
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const config = await getSiteConfig();
   const subscribed = false;
   return (
     <html
-      lang="en"
+      lang={config.language}
       className={`${libreBaskerville.variable} ${sourceSans.variable} ${ibmPlexMono.variable} bg-background`}
     >
       <body className="font-sans antialiased">
