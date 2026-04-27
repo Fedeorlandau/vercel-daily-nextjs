@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import {
   getArticleBySlug,
   getArticles,
@@ -5,6 +6,7 @@ import {
   getPublicationConfig,
   getTrendingArticles,
 } from "./api";
+import { Subscription } from "./types";
 
 export async function getSiteConfig() {
   "use cache";
@@ -50,4 +52,15 @@ export async function getBreakingNewsContent() {
   const breakingNews = await getBreakingNews();
 
   return breakingNews;
+}
+
+export async function getSubscription() {
+  const cookie = (await cookies()).get("subscription")
+    ?.value as unknown as string;
+
+  if (cookie) {
+    const subscription = JSON.parse(cookie) as Subscription;
+    return subscription;
+  }
+  return undefined;
 }

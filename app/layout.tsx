@@ -8,8 +8,11 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "react-day-picker";
-import { getSiteConfig } from "@/lib/services";
+import { getSiteConfig, getSubscription } from "@/lib/services";
 import BreakingNews from "@/components/breaking-news";
+import { cookies } from "next/headers";
+import NavbarActions from "@/components/navbar-actions";
+import { Suspense } from "react";
 
 const libreBaskerville = Libre_Baskerville({
   subsets: ["latin"],
@@ -47,7 +50,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const config = await getSiteConfig();
-  const subscribed = false;
+
   return (
     <html
       lang={config.language}
@@ -55,7 +58,13 @@ export default async function RootLayout({
     >
       <body className="font-sans antialiased">
         <div className="min-h-screen flex flex-col">
-          <Navbar subscribed={subscribed} />
+          <Navbar
+            actions={
+              <Suspense>
+                <NavbarActions />
+              </Suspense>
+            }
+          />
           <BreakingNews />
 
           <main className="flex-1">{children}</main>

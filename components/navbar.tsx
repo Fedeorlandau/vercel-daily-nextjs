@@ -1,20 +1,10 @@
 "use client";
-
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Bell, Menu, X } from "lucide-react";
 import Link from "next/link";
+import NavbarActions from "./navbar-actions";
 
-interface NavbarProps {
-  subscribed?: boolean;
-  onSubscribe?: () => void;
-  onUnsubscribe?: () => void;
-}
-
-export function Navbar({
-  subscribed = false,
-  onSubscribe,
-  onUnsubscribe,
-}: NavbarProps) {
+export function Navbar({ actions }: { actions: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -67,26 +57,7 @@ export function Navbar({
             <Bell size={14} />
           </button>
 
-          {subscribed ? (
-            <div className="hidden md:flex items-center gap-2">
-              <span className="label-mono bg-accent text-accent-foreground px-3 py-1.5 text-xs">
-                ✓ SUBSCRIBED
-              </span>
-              <button
-                onClick={onUnsubscribe}
-                className="label-mono text-xs border border-foreground px-3 py-1.5 hover:bg-foreground hover:text-primary-foreground transition-colors"
-              >
-                Unsubscribe
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={onSubscribe}
-              className="hidden md:block label-mono text-xs bg-foreground text-primary-foreground px-4 py-1.5 hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              Subscribe
-            </button>
-          )}
+          {actions}
 
           {/* Mobile hamburger */}
           <button
@@ -120,21 +91,7 @@ export function Navbar({
           >
             Articles
           </a>
-          {subscribed ? (
-            <button
-              onClick={onUnsubscribe}
-              className="label-mono text-xs border border-foreground px-3 py-2 text-left"
-            >
-              Unsubscribe
-            </button>
-          ) : (
-            <button
-              onClick={onSubscribe}
-              className="label-mono text-xs bg-foreground text-primary-foreground px-3 py-2 text-left"
-            >
-              Subscribe
-            </button>
-          )}
+          {actions}
         </div>
       )}
     </header>
