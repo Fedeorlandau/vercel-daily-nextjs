@@ -32,6 +32,8 @@ This is my Nextjs Foundations repo: [https://github.com/Fedeorlandau/nextjs-foun
 - Implemented the breaking news also using suspense
 - Here I realized that the features articles should come from the list of articles and not the trending API.
 - The featured articles are showing just 5 because the sixth is on the hero. Thats my design decision :P
+- Started replacing anchor for nextjs link
+- Now I will work on setting cookies for the subscribed state
 
 ## General Site Requirements
 

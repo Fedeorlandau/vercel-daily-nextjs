@@ -1,16 +1,21 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Bell, Menu, X } from "lucide-react"
+import { useState } from "react";
+import { Bell, Menu, X } from "lucide-react";
+import Link from "next/link";
 
 interface NavbarProps {
-  subscribed?: boolean
-  onSubscribe?: () => void
-  onUnsubscribe?: () => void
+  subscribed?: boolean;
+  onSubscribe?: () => void;
+  onUnsubscribe?: () => void;
 }
 
-export function Navbar({ subscribed = false, onSubscribe, onUnsubscribe }: NavbarProps) {
-  const [mobileOpen, setMobileOpen] = useState(false)
+export function Navbar({
+  subscribed = false,
+  onSubscribe,
+  onUnsubscribe,
+}: NavbarProps) {
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <header className="border-b-4 border-foreground bg-background sticky top-0 z-50">
@@ -19,24 +24,36 @@ export function Navbar({ subscribed = false, onSubscribe, onUnsubscribe }: Navba
 
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-14">
         {/* Logo */}
-        <div className="flex items-center gap-3">
-          <div className="w-7 h-7 bg-foreground flex items-center justify-center">
-            <span className="text-primary-foreground font-mono text-xs font-bold">▲</span>
+        <Link href="/">
+          <div className="flex items-center gap-3">
+            <div className="w-7 h-7 bg-foreground flex items-center justify-center">
+              <span className="text-primary-foreground font-mono text-xs font-bold">
+                ▲
+              </span>
+            </div>
+            <span className="font-serif font-bold text-lg tracking-tight text-foreground">
+              The Daily Dispatch
+            </span>
           </div>
-          <span className="font-serif font-bold text-lg tracking-tight text-foreground">
-            The Daily Dispatch
-          </span>
-        </div>
-
+        </Link>
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
-          <a href="#" className="label-mono text-foreground hover:text-accent transition-colors">
+          <Link
+            href="/"
+            className="label-mono text-foreground hover:text-accent transition-colors"
+          >
             Home
-          </a>
-          <a href="#search-section" className="label-mono text-foreground hover:text-accent transition-colors">
+          </Link>
+          <a
+            href="#search-section"
+            className="label-mono text-foreground hover:text-accent transition-colors"
+          >
             Search
           </a>
-          <a href="#articles-section" className="label-mono text-foreground hover:text-accent transition-colors">
+          <a
+            href="#articles-section"
+            className="label-mono text-foreground hover:text-accent transition-colors"
+          >
             Articles
           </a>
         </nav>
@@ -85,20 +102,41 @@ export function Navbar({ subscribed = false, onSubscribe, onUnsubscribe }: Navba
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden border-t-2 border-foreground bg-background px-4 py-4 flex flex-col gap-3">
-          <a href="#" className="label-mono text-foreground py-1 border-b border-border">Home</a>
-          <a href="#search-section" className="label-mono text-foreground py-1 border-b border-border">Search</a>
-          <a href="#articles-section" className="label-mono text-foreground py-1 border-b border-border">Articles</a>
+          <a
+            href="#"
+            className="label-mono text-foreground py-1 border-b border-border"
+          >
+            Home
+          </a>
+          <a
+            href="#search-section"
+            className="label-mono text-foreground py-1 border-b border-border"
+          >
+            Search
+          </a>
+          <a
+            href="#articles-section"
+            className="label-mono text-foreground py-1 border-b border-border"
+          >
+            Articles
+          </a>
           {subscribed ? (
-            <button onClick={onUnsubscribe} className="label-mono text-xs border border-foreground px-3 py-2 text-left">
+            <button
+              onClick={onUnsubscribe}
+              className="label-mono text-xs border border-foreground px-3 py-2 text-left"
+            >
               Unsubscribe
             </button>
           ) : (
-            <button onClick={onSubscribe} className="label-mono text-xs bg-foreground text-primary-foreground px-3 py-2 text-left">
+            <button
+              onClick={onSubscribe}
+              className="label-mono text-xs bg-foreground text-primary-foreground px-3 py-2 text-left"
+            >
               Subscribe
             </button>
           )}
         </div>
       )}
     </header>
-  )
+  );
 }
