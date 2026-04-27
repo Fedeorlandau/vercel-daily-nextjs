@@ -1,6 +1,7 @@
 import {
   getArticleBySlug,
   getArticles,
+  getBreakingNews,
   getPublicationConfig,
   getTrendingArticles,
 } from "./api";
@@ -32,4 +33,11 @@ export async function getFeaturedArticles() {
   const articles = await getTrendingArticles();
 
   return articles;
+}
+
+export async function getBreakingNewsContent() {
+  "use cache";
+  const breakingNews = await getBreakingNews();
+
+  return breakingNews;
 }

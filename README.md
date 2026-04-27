@@ -38,7 +38,7 @@ This is my Nextjs Foundations repo: [https://github.com/Fedeorlandau/nextjs-foun
 - Replaced regular img for next/image. I had to whitelist domain in next config.
 - **AI Usage**: to generate the skeleton of the featured hero article https://v0.app/chat/loading-state-component-hFABUhPj2Cg?ref=USSWZW
 - Use suspense and the skeleton above to not block the UI render for featured posts in homepage.
--
+- Implemented the breaking news also using suspense
 
 ## General Site Requirements
 

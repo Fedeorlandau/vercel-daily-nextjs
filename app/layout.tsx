@@ -6,10 +6,10 @@ import {
 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
-import { BreakingNewsBanner } from "@/components/breaking-news-banner";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "react-day-picker";
 import { getSiteConfig } from "@/lib/services";
+import BreakingNews from "@/components/breaking-news";
 
 const libreBaskerville = Libre_Baskerville({
   subsets: ["latin"],
@@ -56,7 +56,7 @@ export default async function RootLayout({
       <body className="font-sans antialiased">
         <div className="min-h-screen flex flex-col">
           <Navbar subscribed={subscribed} />
-          <BreakingNewsBanner />
+          <BreakingNews />
 
           <main className="flex-1">{children}</main>
 

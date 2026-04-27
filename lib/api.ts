@@ -2,6 +2,7 @@ import "server-only";
 import {
   ArticleListResponse,
   ArticleResponse,
+  BreakingNewsResponse,
   PublicationConfig,
   PublicationConfigResponse,
   TrendingArticlesResponse,
@@ -67,6 +68,22 @@ export async function getTrendingArticles() {
   });
 
   const response = (await apiCall.json()) as TrendingArticlesResponse;
+
+  return response.data;
+}
+
+export async function getBreakingNews() {
+  const baseUrl = process.env.API_BASE_URL;
+  const apiKey = process.env.API_KEY as string;
+
+  const reqHeaders = new Headers();
+  reqHeaders.set("x-vercel-protection-bypass", apiKey);
+
+  const apiCall = await fetch(`${baseUrl}/breaking-news`, {
+    headers: reqHeaders,
+  });
+
+  const response = (await apiCall.json()) as BreakingNewsResponse;
 
   return response.data;
 }
