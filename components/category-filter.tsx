@@ -3,42 +3,47 @@
 import { Category } from "@/lib/types";
 import { ChevronDown } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 function CategoryFilter({ categories }: { categories: Category[] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const defaultCategory = searchParams.get("category") ?? "";
+
+  const categoryFromUrl = searchParams.get("category") ?? "all";
+  const [selectedCategory, setSelectedCategory] = useState(categoryFromUrl);
+
+  useEffect(() => {
+    setSelectedCategory(categoryFromUrl);
+  }, [categoryFromUrl]);
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
       params.set(name, value);
-
       return params.toString();
     },
     [searchParams],
   );
 
-  const onSelect = (query: string) => {
-    router.push("/search" + "?" + createQueryString("category", query));
+  const onSelect = (value: string) => {
+    setSelectedCategory(value);
+    const queryString = createQueryString("category", value);
+    router.push("/search" + `?${queryString}`);
   };
 
   return (
     <div className="relative">
       <select
-        defaultValue={defaultCategory}
-        onChange={(event) => onSelect(event.currentTarget.value)}
+        value={selectedCategory}
+        onChange={(event) => onSelect(event.target.value)}
         className="appearance-none border-2 border-foreground bg-background font-sans text-sm text-foreground px-4 py-2.5 pr-10 focus:outline-none focus:border-accent transition-colors min-w-48 cursor-pointer"
       >
-        <option value={"all"}>All</option>
-        {categories.map((category) => {
-          return (
-            <option value={category.slug} key={category.name}>
-              {category.name}
-            </option>
-          );
-        })}
+        <option value="all">All</option>
+        {categories.map((category) => (
+          <option value={category.slug} key={category.slug}>
+            {category.name}
+          </option>
+        ))}
       </select>
       <ChevronDown
         size={14}

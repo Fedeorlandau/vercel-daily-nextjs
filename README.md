@@ -61,6 +61,7 @@ My getArticle function is **cached** but the **subscribed** one reads from cooki
 - I will try to pass it as a promise, this now is getting frustrating again. This failed. What is the point of providing searchParams on the page level if i can't use it? nor unpack the promise with use().
 - The fix was easier than expected, just use useSearchParams for the defaultValue as well, it was my mental model failing to get that simple fix :P
 - I found a nice bug, I make a search, then click on any result, if I go to the search page again (by clicking on the navbar) my old search query and category are still there. This has to be with the state not been cleared? I fixed this by deriving state for input
+- I will start with cleanup and missing features like opengraph
 
 ## General Site Requirements
 

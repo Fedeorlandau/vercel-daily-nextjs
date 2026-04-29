@@ -16,6 +16,7 @@ export async function GET(_req: NextRequest) {
   const articles = await getArticlesList({
     search,
     category,
+    limit: 5,
   });
 
   return Response.json({ articles });

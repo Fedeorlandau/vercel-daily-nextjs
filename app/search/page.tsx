@@ -1,8 +1,5 @@
-import CategoryFilter from "@/components/category-filter";
-import SearchBar from "@/components/search-bar";
 import SearchControls from "@/components/search-controls";
 import SearchSection from "@/components/search-section";
-import { getCategoriesList } from "@/lib/services";
 import { Suspense } from "react";
 
 export default async function SearchPage() {

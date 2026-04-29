@@ -13,12 +13,14 @@ export interface GetArticlesProps {
   featured?: boolean;
   category?: CategorySlug;
   search?: string;
+  limit?: number;
 }
 
 export async function getArticles({
   featured,
   category,
   search,
+  limit,
 }: GetArticlesProps) {
   const baseUrl = process.env.API_BASE_URL;
   const apiKey = process.env.API_KEY as string;
@@ -28,7 +30,7 @@ export async function getArticles({
 
   const params = new URLSearchParams({
     page: "1",
-    limit: "20",
+    limit: String(limit) ?? "20",
   });
 
   if (featured) {
