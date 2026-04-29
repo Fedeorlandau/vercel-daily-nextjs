@@ -49,9 +49,9 @@ This is my Nextjs Foundations repo: [https://github.com/Fedeorlandau/nextjs-foun
 
 My getArticle function is **cached** but the **subscribed** one reads from cookies. So is the benefit just caching the articles fetch? Then the page will load dynamically anyways. To my point: then what is the point of the "use cache" boilerplate if the entire page becomes dynamic by the use of cookies (which is the 99.999% of the websites)
 
-- Back to it, I know I get it, I need to move things down the chain, wrap things in Suspense and I should be fine. getSubscription will live down the tree. It makes sense. Skill issue?
+- Back to it, I know I get it, I need to **move things down the chain**, wrap things in Suspense and I should be fine. getSubscription will live down the tree. It makes sense. Skill issue.
 - It's starting to look ok now but I dont really like how next is forcing me to structure my components.
-- ** AI Usage**: to format the content response for the articles. https://v0.app/chat/pJU5AuA6Ovb?ref=USSWZW
+- **AI Usage**: to format the content response for the articles. https://v0.app/chat/pJU5AuA6Ovb?ref=USSWZW
 - I know I should be adding a markdown render but I prefer focusing on search now
 - Also I need to add loading state for when the subscribe call is running.
 - Moving to Search, this doc is really helpful https://nextjs.org/docs/app/api-reference/functions/use-search-params#prerendering
@@ -63,63 +63,8 @@ My getArticle function is **cached** but the **subscribed** one reads from cooki
 - I found a nice bug, I make a search, then click on any result, if I go to the search page again (by clicking on the navbar) my old search query and category are still there. This has to be with the state not been cleared? I fixed this by deriving state for input
 - I will start with cleanup and missing features like opengraph
 - For this, I will implement opengraph-image to make it look nicer. `/articles/a-more-flexible-pro-plan-for-modern-teams/opengraph-image`
+- After some cleanup (making sure all links are next/link and images next/image) I believe I'm done.
 
-## General Site Requirements
+## Final Thoughts
 
-| Component              | Specification                                                                             |
-| ---------------------- | ----------------------------------------------------------------------------------------- |
-| Header                 | Persistent header containing a logo and navigation links to the Homepage and Search page. |
-| Footer                 | Footer containing copyright text and year.                                                |
-| Layout                 | Shared root layout that renders the header and footer on all pages.                       |
-| Responsive Design      | The application must be mobile-friendly and work well across different viewport sizes.    |
-| Root Metadata          | Define default metadata in the root layout that applies to all pages.                     |
-| Page-Specific Metadata | Each page should export its own metadata that overrides or extends the root metadata.     |
-| Open Graph             | Include Open Graph metadata (openGraph) for social sharing.                               |
-| Cache Components       | Cache Components are enabled.                                                             |
-
-Route: /
-
-| Component            | Specification                                                                                                                                                           |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Hero Section         | A prominent hero area with headline text, supporting description, and a visual element (featured story image or illustration).                                          |
-| Breaking News Banner | A banner displaying the latest breaking news or trending topic, fetched from the provided API.                                                                          |
-| Featured Articles    | A grid displaying at least 6 articles fetched from the provided API. Each article should show its image, headline, category, publish date, and link to its detail page. |
-
-## Page 2: Article Detail Page
-
-Route: /articles/\[param\]
-
-| Component         | Specification                                                                         |
-| ----------------- | ------------------------------------------------------------------------------------- |
-| Article Header    | The article headline, author name, publish date, and category.                        |
-| Featured Image    | A large hero image for the article.                                                   |
-| Article Content   | The full article body text.                                                           |
-| Trending Articles | A section displaying 3-4 trending articles fetched dynamically from the provided API. |
-| Subscribe CTA     | If the user is not subscribed, display a call-to-action to subscribe.                 |
-
-## Subscription & Paywall Functionality
-
-| Component                   | Specification                                                                                                                                                                                   |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Subscribe Action            | Users can subscribe to Vercel Daily via a subscribe button. Authentication is not required — subscription is anonymous and it persists on page refresh.                                         |
-| Subscription Indicator      | The header displays the user’s subscription status (e.g., ‘Subscribe’ button when not subscribed, ‘Subscribed’ badge or ‘Unsubscribe’ option when subscribed).                                  |
-| Unsubscribe Action          | Subscribed users can unsubscribe via an unsubscribe button or toggle.                                                                                                                           |
-| Session Persistence         | The subscription state persists within the same browser session using cookies. If the user refreshes the page or navigates away and returns, their subscription status should still be present. |
-| Paywall Enforcement         | Non-subscribed users attempting to view article detail pages are shown a paywalled version that does not render the full article content.                                                       |
-| Paywall UI                  | The paywalled page shows the article headline, featured image, and a teaser (first paragraph or excerpt), followed by a prominent call-to-action to subscribe.                                  |
-| Full Access for Subscribers | Subscribed users see the complete article content without any paywall restrictions.                                                                                                             |
-
-## Page 3: Search Page
-
-Route: /search
-
-| Component               | Specification                                                                                                                           |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| Search Input            | A text input field for entering search queries.                                                                                         |
-| Category Filter         | A dropdown or select input allowing users to filter articles by category.                                                               |
-| Search Behavior         | Searches can be triggered by pressing Enter, clicking a search button, or automatically after the user has typed at least 3 characters. |
-| Default State           | When no search has been performed, display a default set of recent articles.                                                            |
-| Search Results          | When a search is performed, display up to 5 matching articles in a responsive grid layout.                                              |
-| Empty State             | When a search returns no results, display an appropriate message.                                                                       |
-| Loading State           | Visual feedback while a search is being performed.                                                                                      |
-| Persistent Search State | If the user refreshes the page or shares the URL, the same search results should appear (including category filter).                    |
+I must say that the site works really nice, all nextjs features work nicely after you give it a couple of tries. I did have some frustrations because my mental model wasnt ready or I misinterpreted a few features. Next is driving the architecture, not just on the website level but also on the component definition which is something you need to get used to.
