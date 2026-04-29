@@ -53,6 +53,10 @@ My getArticle function is **cached** but the **subscribed** one reads from cooki
 - It's starting to look ok now but I dont really like how next is forcing me to structure my components.
 - ** AI Usage**: to format the content response for the articles. https://v0.app/chat/pJU5AuA6Ovb?ref=USSWZW
 - I know I should be adding a markdown render but I prefer focusing on search now
+- Also I need to add loading state for when the subscribe call is running.
+- Moving to Search, this doc is really helpful https://nextjs.org/docs/app/api-reference/functions/use-search-params#prerendering
+- Now I have my main decision on the Search strategy, should i create an api route or a server action cached. Since i need search as you type I go with a classic route handler, also for the sake of demonstrating more nextjs features.
+- I realized a really nice approach, i can use SWR for data fetching and the same searchParams for automatic search on the api route handler.
 
 ## General Site Requirements
 

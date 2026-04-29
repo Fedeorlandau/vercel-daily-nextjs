@@ -3,11 +3,23 @@ import {
   ArticleListResponse,
   ArticleResponse,
   BreakingNewsResponse,
+  CategoryListResponse,
+  CategorySlug,
   PublicationConfigResponse,
   TrendingArticlesResponse,
 } from "./types";
 
-export async function getArticles({ featured }: { featured?: boolean }) {
+export interface GetArticlesProps {
+  featured?: boolean;
+  category?: CategorySlug;
+  search?: string;
+}
+
+export async function getArticles({
+  featured,
+  category,
+  search,
+}: GetArticlesProps) {
   const baseUrl = process.env.API_BASE_URL;
   const apiKey = process.env.API_KEY as string;
 
@@ -19,8 +31,16 @@ export async function getArticles({ featured }: { featured?: boolean }) {
     limit: "20",
   });
 
-  if (featured !== undefined) {
+  if (featured) {
     params.append("featured", String(featured));
+  }
+
+  if (category) {
+    params.append("category", category);
+  }
+
+  if (search) {
+    params.append("search", search);
   }
 
   const apiCall = await fetch(`${baseUrl}/articles?${params.toString()}`, {
@@ -92,6 +112,22 @@ export async function getBreakingNews() {
   });
 
   const response = (await apiCall.json()) as BreakingNewsResponse;
+
+  return response.data;
+}
+
+export async function getCategories() {
+  const baseUrl = process.env.API_BASE_URL;
+  const apiKey = process.env.API_KEY as string;
+
+  const reqHeaders = new Headers();
+  reqHeaders.set("x-vercel-protection-bypass", apiKey);
+
+  const apiCall = await fetch(`${baseUrl}/categories`, {
+    headers: reqHeaders,
+  });
+
+  const response = (await apiCall.json()) as CategoryListResponse;
 
   return response.data;
 }

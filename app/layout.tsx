@@ -8,9 +8,8 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "react-day-picker";
-import { getSiteConfig, getSubscription } from "@/lib/services";
+import { getSiteConfig } from "@/lib/services";
 import BreakingNews from "@/components/breaking-news";
-import { cookies } from "next/headers";
 import NavbarActions from "@/components/navbar-actions";
 import { Suspense } from "react";
 

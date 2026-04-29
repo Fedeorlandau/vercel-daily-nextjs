@@ -2,7 +2,9 @@ import { cookies } from "next/headers";
 import {
   getArticleBySlug,
   getArticles,
+  GetArticlesProps,
   getBreakingNews,
+  getCategories,
   getPublicationConfig,
   getTrendingArticles,
 } from "./api";
@@ -22,10 +24,10 @@ export async function getArticle(slug: string) {
   return article;
 }
 
-export async function getArticlesList() {
+export async function getArticlesList(options: GetArticlesProps) {
   "use cache";
 
-  const articles = await getArticles({});
+  const articles = await getArticles(options);
 
   return articles;
 }
@@ -63,4 +65,11 @@ export async function getSubscription() {
     return subscription;
   }
   return undefined;
+}
+
+export async function getCategoriesList() {
+  "use cache";
+  const categories = await getCategories();
+
+  return categories;
 }

@@ -34,18 +34,12 @@ export function Navbar({ actions }: { actions: React.ReactNode }) {
           >
             Home
           </Link>
-          <a
-            href="#search-section"
+          <Link
+            href="/search"
             className="label-mono text-foreground hover:text-accent transition-colors"
           >
             Search
-          </a>
-          <a
-            href="#articles-section"
-            className="label-mono text-foreground hover:text-accent transition-colors"
-          >
-            Articles
-          </a>
+          </Link>
         </nav>
 
         {/* Right actions */}
