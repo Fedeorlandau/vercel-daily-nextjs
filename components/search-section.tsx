@@ -1,6 +1,7 @@
 "use client";
 import { Article } from "@/lib/types";
 import { Loader2 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
@@ -45,9 +46,11 @@ function SearchSection() {
                 key={article.id}
                 className="flex gap-4 py-4 border-b-2 border-border last:border-b-0 cursor-pointer group hover:bg-muted/50 px-2 -mx-2 transition-colors"
               >
-                <img
+                <Image
                   src={article.image}
                   alt={article.title}
+                  width={200}
+                  height={100}
                   className="w-20 h-16 object-cover border-2 border-foreground shrink-0 opacity-85 group-hover:opacity-100 transition-opacity"
                 />
                 <div className="flex-1 min-w-0">
