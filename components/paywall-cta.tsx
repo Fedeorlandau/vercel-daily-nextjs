@@ -1,5 +1,6 @@
 import { createSubscriptionAction } from "@/app/actions";
 import { Lock } from "lucide-react";
+import PaywallButton from "./paywall-button";
 
 export function PaywallCTA() {
   return (
@@ -33,12 +34,7 @@ export function PaywallCTA() {
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <form action={createSubscriptionAction}>
-            <button
-              type="submit"
-              className="bg-foreground text-primary-foreground label-mono text-xs px-8 py-3 hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              Subscribe — It&apos;s Free →
-            </button>
+            <PaywallButton />
           </form>
         </div>
 

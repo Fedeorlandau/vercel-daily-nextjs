@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import FeaturedArticleHero from "./featured-article-hero";
 import { FeaturedArticleHeroSkeleton } from "./featured-article-hero-skeleton";
-import { createSubscriptionAction } from "@/app/actions";
 import HeroActions from "./hero-actions";
+import Link from "next/link";
 export function HeroSection() {
   return (
     <section className="border-b-4 border-foreground bg-background">
@@ -20,12 +20,12 @@ export function HeroSection() {
               community updates — all in one place.
             </p>
             <div className="flex flex-wrap gap-3">
-              <a
-                href="#articles-section"
+              <Link
+                href="/search"
                 className="inline-flex items-center gap-2 bg-foreground text-primary-foreground px-6 py-3 label-mono text-xs hover:bg-accent hover:text-accent-foreground transition-colors"
               >
                 Browse articles →
-              </a>
+              </Link>
               <Suspense>
                 <HeroActions />
               </Suspense>

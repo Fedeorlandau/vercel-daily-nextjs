@@ -7,7 +7,7 @@ import {
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
-import { Footer } from "react-day-picker";
+import { Footer } from "@/components/footer";
 import { getSiteConfig } from "@/lib/services";
 import BreakingNews from "@/components/breaking-news";
 import NavbarActions from "@/components/navbar-actions";

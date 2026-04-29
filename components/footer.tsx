@@ -7,25 +7,15 @@ export function Footer() {
           <div className="w-5 h-5 bg-accent flex items-center justify-center">
             <span className="text-accent-foreground font-mono text-xs">▲</span>
           </div>
-          <span className="label-mono text-xs text-primary-foreground/80">The Daily Dispatch</span>
+          <span className="label-mono text-xs text-primary-foreground/80">
+            The Daily Dispatch
+          </span>
         </div>
 
         <p className="label-mono text-xs text-primary-foreground/50">
           © 2026 The Daily Dispatch. All rights reserved.
         </p>
-
-        <nav className="flex items-center gap-4">
-          <a href="#" className="label-mono text-xs text-primary-foreground/60 hover:text-accent transition-colors">
-            Privacy
-          </a>
-          <a href="#" className="label-mono text-xs text-primary-foreground/60 hover:text-accent transition-colors">
-            Terms
-          </a>
-          <a href="#" className="label-mono text-xs text-primary-foreground/60 hover:text-accent transition-colors">
-            Contact
-          </a>
-        </nav>
       </div>
     </footer>
-  )
+  );
 }
