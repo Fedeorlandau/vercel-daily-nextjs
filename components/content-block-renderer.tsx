@@ -103,7 +103,7 @@ function OrderedListRenderer({ block }: { block: OrderedListBlock }) {
 }
 
 function ImageRenderer({ block }: { block: ImageBlock }) {
-  return (
+  return block.src ? (
     <figure className="my-8">
       <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-muted">
         <Image
@@ -120,7 +120,7 @@ function ImageRenderer({ block }: { block: ImageBlock }) {
         </figcaption>
       )}
     </figure>
-  );
+  ) : null;
 }
 
 // ============== Block Router ==============
