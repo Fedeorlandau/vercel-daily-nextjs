@@ -8,6 +8,7 @@ import React, { useCallback } from "react";
 function CategoryFilter({ categories }: { categories: Category[] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const defaultCategory = searchParams.get("category") ?? "";
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -26,11 +27,17 @@ function CategoryFilter({ categories }: { categories: Category[] }) {
   return (
     <div className="relative">
       <select
+        defaultValue={defaultCategory}
         onChange={(event) => onSelect(event.currentTarget.value)}
         className="appearance-none border-2 border-foreground bg-background font-sans text-sm text-foreground px-4 py-2.5 pr-10 focus:outline-none focus:border-accent transition-colors min-w-48 cursor-pointer"
       >
+        <option value={"all"}>All</option>
         {categories.map((category) => {
-          return <option value={category.name}>{category.name}</option>;
+          return (
+            <option value={category.slug} key={category.name}>
+              {category.name}
+            </option>
+          );
         })}
       </select>
       <ChevronDown

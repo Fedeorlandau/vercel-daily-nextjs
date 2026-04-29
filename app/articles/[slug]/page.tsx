@@ -1,11 +1,5 @@
 import { ArticleDetail } from "@/components/article-detail";
-import { getSubscriptionStatus } from "@/lib/auth";
-import {
-  getArticle,
-  getArticlesList,
-  getSiteConfig,
-  getSubscription,
-} from "@/lib/services";
+import { getArticle, getArticlesList, getSiteConfig } from "@/lib/services";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
@@ -28,7 +22,7 @@ export async function generateMetadata({
  * I realized that the API for listing the articles is paginated so I will only render at build time the first page.
  */
 export async function generateStaticParams() {
-  const articles = await getArticlesList();
+  const articles = await getArticlesList({});
 
   const slugs = articles.map((article) => {
     return {

@@ -57,6 +57,10 @@ My getArticle function is **cached** but the **subscribed** one reads from cooki
 - Moving to Search, this doc is really helpful https://nextjs.org/docs/app/api-reference/functions/use-search-params#prerendering
 - Now I have my main decision on the Search strategy, should i create an api route or a server action cached. Since i need search as you type I go with a classic route handler, also for the sake of demonstrating more nextjs features.
 - I realized a really nice approach, i can use SWR for data fetching and the same searchParams for automatic search on the api route handler.
+- Found a showstopper? searchParams on the page level is throwing errors because im not accessing it via Suspense. I was going to use it for the defaultValue of the form.
+- I will try to pass it as a promise, this now is getting frustrating again. This failed. What is the point of providing searchParams on the page level if i can't use it? nor unpack the promise with use().
+- The fix was easier than expected, just use useSearchParams for the defaultValue as well, it was my mental model failing to get that simple fix :P
+- I found a nice bug, I make a search, then click on any result, if I go to the search page again (by clicking on the navbar) my old search query and category are still there. This has to be with the state not been cleared? I fixed this by deriving state for input
 
 ## General Site Requirements
 

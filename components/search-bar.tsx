@@ -1,32 +1,37 @@
 "use client";
 import { Search } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useCallback } from "react";
-import useSWR from "swr";
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+import { useCallback, useEffect, useState } from "react";
 
 function SearchBar() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const queryFromUrl = searchParams.get("query") ?? "";
+  const [inputValue, setInputValue] = useState(queryFromUrl);
+
+  useEffect(() => {
+    setInputValue(queryFromUrl);
+  }, [queryFromUrl]);
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-
+      if (value) {
+        params.set(name, value);
+      } else {
+        params.delete(name);
+      }
       return params.toString();
     },
     [searchParams],
   );
 
-  const { data, error, isLoading } = useSWR(
-    `/api/search?${searchParams}`,
-    fetcher,
-  );
-
   const onSearch = (query: string) => {
-    router.push("/search" + "?" + createQueryString("query", query));
+    if (query.length >= 3) {
+      router.push("/search" + "?" + createQueryString("query", query));
+    } else if (query.length === 0) {
+      router.push("/search");
+    }
   };
 
   return (
@@ -38,8 +43,11 @@ function SearchBar() {
         />
         <input
           type="text"
+          value={inputValue}
           onChange={(event) => {
-            onSearch(event.currentTarget.value);
+            const val = event.target.value;
+            setInputValue(val);
+            onSearch(val);
           }}
           placeholder="Search articles..."
           className="w-full pl-9 pr-4 py-2.5 border-2 border-foreground bg-background font-sans text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors"
