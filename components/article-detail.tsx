@@ -2,6 +2,7 @@ import { Article } from "@/lib/types";
 import { TrendingArticles } from "./trending-articles";
 import { Suspense } from "react";
 import ArticleContent from "./article-content";
+import Image from "next/image";
 
 interface ArticleDetailProps {
   article: Article;
@@ -30,7 +31,7 @@ export function ArticleDetail({ article, subscribed }: ArticleDetailProps) {
             <div className="flex items-center gap-3">
               <div className="w-7 h-7 bg-foreground border-2 border-foreground flex items-center justify-center">
                 <span className="text-primary-foreground font-mono text-xs font-bold">
-                  {article.author.name}
+                  {article.author.avatar || article.author.name.charAt(0)}
                 </span>
               </div>
               <div>
@@ -42,10 +43,12 @@ export function ArticleDetail({ article, subscribed }: ArticleDetailProps) {
           </header>
 
           {/* Featured image */}
-          <div className="border-2 border-foreground mb-6 scanlines overflow-hidden">
-            <img
+          <div className="border-2 border-foreground mb-6 overflow-hidden">
+            <Image
               src={article.image}
               alt={article.title}
+              height={400}
+              width={600}
               className="w-full h-64 md:h-80 object-cover opacity-85"
             />
           </div>

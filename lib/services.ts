@@ -44,6 +44,7 @@ export async function getFeaturedArticles() {
   "use cache";
   const articles = await getArticles({
     featured: true,
+    limit: 6,
   });
 
   return articles;

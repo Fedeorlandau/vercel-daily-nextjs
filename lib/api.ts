@@ -30,7 +30,7 @@ export async function getArticles({
 
   const params = new URLSearchParams({
     page: "1",
-    limit: String(limit) ?? "20",
+    limit: String(limit) || "20",
   });
 
   if (featured) {

@@ -22,7 +22,9 @@ export async function generateMetadata({
  * I realized that the API for listing the articles is paginated so I will only render at build time the first page.
  */
 export async function generateStaticParams() {
-  const articles = await getArticlesList({});
+  const articles = await getArticlesList({
+    limit: 20,
+  });
 
   const slugs = articles.map((article) => {
     return {

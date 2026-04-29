@@ -15,12 +15,6 @@ export async function FeaturedArticlesSection() {
             Featured
           </h2>
         </div>
-        <a
-          href="#"
-          className="label-mono text-xs text-foreground border-b border-foreground hover:text-accent hover:border-accent transition-colors pb-0.5"
-        >
-          View all →
-        </a>
       </div>
 
       <Suspense fallback={<FeaturedArticlesSkeleton />}>

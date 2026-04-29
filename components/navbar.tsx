@@ -44,13 +44,6 @@ export function Navbar({ actions }: { actions: React.ReactNode }) {
 
         {/* Right actions */}
         <div className="flex items-center gap-3">
-          <button
-            aria-label="Notifications"
-            className="p-1.5 border border-foreground hover:bg-foreground hover:text-primary-foreground transition-colors"
-          >
-            <Bell size={14} />
-          </button>
-
           {actions}
 
           {/* Mobile hamburger */}
@@ -67,24 +60,18 @@ export function Navbar({ actions }: { actions: React.ReactNode }) {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden border-t-2 border-foreground bg-background px-4 py-4 flex flex-col gap-3">
-          <a
-            href="#"
+          <Link
+            href="/"
             className="label-mono text-foreground py-1 border-b border-border"
           >
             Home
-          </a>
-          <a
-            href="#search-section"
+          </Link>
+          <Link
+            href="/search"
             className="label-mono text-foreground py-1 border-b border-border"
           >
             Search
-          </a>
-          <a
-            href="#articles-section"
-            className="label-mono text-foreground py-1 border-b border-border"
-          >
-            Articles
-          </a>
+          </Link>
           {actions}
         </div>
       )}

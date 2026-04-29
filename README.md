@@ -62,6 +62,7 @@ My getArticle function is **cached** but the **subscribed** one reads from cooki
 - The fix was easier than expected, just use useSearchParams for the defaultValue as well, it was my mental model failing to get that simple fix :P
 - I found a nice bug, I make a search, then click on any result, if I go to the search page again (by clicking on the navbar) my old search query and category are still there. This has to be with the state not been cleared? I fixed this by deriving state for input
 - I will start with cleanup and missing features like opengraph
+- For this, I will implement opengraph-image to make it look nicer. `/articles/a-more-flexible-pro-plan-for-modern-teams/opengraph-image`
 
 ## General Site Requirements
 
